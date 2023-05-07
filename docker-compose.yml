@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./mariadb:/config
+      - ./data/mariadb:/config
     ports:
       - "3306:3306"
     networks:
@@ -29,7 +29,7 @@ services:
     image: homeassistant/home-assistant
     container_name: iot_hass_homeassistant
     volumes:
-      - ./hass-config:/config
+      - ./data/hass-config:/config
     env_file:
       - ./.env
     restart: unless-stopped
@@ -48,7 +48,7 @@ services:
     ports:
       - "1885:1880"
     volumes:
-      - ./nodered:/data
+      - ./data/nodered:/data
     depends_on:
       - iot_hass_homeassistant
       - iot_hass_mqtt
@@ -65,9 +65,9 @@ services:
     ports:
       - "1883:1883"
     volumes:
-      - "./mosquitto/config:/mosquitto/config"
-      - "./mosquitto/data:/mosquitto/data"
-      - "./mosquitto/log:/mosquitto/log"
+      - "./data/mosquitto/config:/mosquitto/config"
+      - "./data/mosquitto/data:/mosquitto/data"
+      - "./data/mosquitto/log:/mosquitto/log"
     env_file:
       - ./.env
     user: "${PUID}:${PGID}"
@@ -81,8 +81,8 @@ services:
     ports:
       - "3218:3218/tcp"
     volumes:
-      - "./configurator-config:/config"
-      - "./hass-config:/hass-config"
+      - "./data/configurator-config:/config"
+      - "./data/hass-config:/hass-config"
     depends_on:
       - iot_hass_homeassistant
     user: "${PUID}:${PGID}"
