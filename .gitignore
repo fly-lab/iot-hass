@@ -6,3 +6,5 @@
 mariadb/*
 hass-config/*
 nodered/*
+mosquitto/data/*
+mosquitto/log/*
