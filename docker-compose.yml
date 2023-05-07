@@ -55,6 +55,22 @@ services:
     restart: unless-stopped
     networks:
       - iot_hass_net
+  
+  iot_hass_mqtt:
+    image: eclipse-mosquitto
+    container_name: iot_hass_mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - "./mosquitto/config:/mosquitto/config"
+      - "./mosquitto/data:/mosquitto/data"
+      - "./mosquitto/log:/mosquitto/log"
+    env_file:
+      - ./.env
+    user: "${PUID}:${PGID}"
+    networks:
+      - iot_hass_net
 
 networks:
   iot_hass_net:
