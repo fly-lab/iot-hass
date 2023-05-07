@@ -40,6 +40,21 @@ services:
       - iot_hass_mariadb
     networks:
       - iot_hass_net
+  
+  iot_hass_nodered:
+    container_name: iot_hass_nodered
+    image: nodered/node-red
+    ports:
+      - "1885:1880"
+    volumes:
+      - ./nodered:/data
+    depends_on:
+      - iot_hass_homeassistant
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    networks:
+      - iot_hass_net
 
 networks:
   iot_hass_net:
