@@ -24,6 +24,22 @@ services:
       - iot_hass_mariadb
     networks:
       - iot_hass_net
+  
+  iot_hass_homeassistant:
+    image: homeassistant/home-assistant
+    container_name: iot_hass_homeassistant
+    volumes:
+      - ./hass-config:/config
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    ports:
+      - 8123:8123
+    privileged: true
+    depends_on:
+      - iot_hass_mariadb
+    networks:
+      - iot_hass_net
 
 networks:
   iot_hass_net:
