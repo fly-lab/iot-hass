@@ -38,6 +38,7 @@ services:
     privileged: true
     depends_on:
       - iot_hass_mariadb
+      - iot_hass_mqtt
     networks:
       - iot_hass_net
   
@@ -50,6 +51,7 @@ services:
       - ./nodered:/data
     depends_on:
       - iot_hass_homeassistant
+      - iot_hass_mqtt
     env_file:
       - ./.env
     restart: unless-stopped
