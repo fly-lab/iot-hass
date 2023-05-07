@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  iot_hass_mariadb:
+    image: linuxserver/mariadb
+    container_name: iot_hass_mariadb
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    volumes:
+      - ./mariadb:/config
+    ports:
+      - "3306:3306"
+    networks:
+      - iot_hass_net
+  
+  iot_hass_adminer:
+    image: adminer
+    container_name: iot_hass_adminer
+    restart: always
+    ports:
+      - 8895:8080
+    depends_on:
+      - iot_hass_mariadb
+    networks:
+      - iot_hass_net
+
+networks:
+  iot_hass_net:
+    driver: bridge
