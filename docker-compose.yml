@@ -73,6 +73,21 @@ services:
     user: "${PUID}:${PGID}"
     networks:
       - iot_hass_net
+  
+  iot_hass_configurator:
+    image: "causticlab/hass-configurator-docker"
+    container_name: iot_hass_configurator
+    restart: unless-stopped
+    ports:
+      - "3218:3218/tcp"
+    volumes:
+      - "./configurator-config:/config"
+      - "./hass-config:/hass-config"
+    depends_on:
+      - iot_hass_homeassistant
+    user: "${PUID}:${PGID}"
+    networks:
+      - iot_hass_net
 
 networks:
   iot_hass_net:
