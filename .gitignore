@@ -4,3 +4,4 @@
 .vscode
 
 mariadb/*
+hass-config/*
