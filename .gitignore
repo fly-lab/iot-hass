@@ -3,11 +3,11 @@
 .idea
 .vscode
 
-mariadb/*
-hass-config/*
-nodered/*
-mosquitto/data/*
-mosquitto/log/*
+data/mariadb/*
+data/hass-config/*
+data/nodered/*
+data/mosquitto/data/*
+data/mosquitto/log/*
 
-!hass-config/configuration.yaml
-!nodered/settings.js
+!data/hass-config/configuration.yaml
+!data/nodered/settings.js
