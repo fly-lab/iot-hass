@@ -10,3 +10,4 @@ mosquitto/data/*
 mosquitto/log/*
 
 !hass-config/configuration.yaml
+!nodered/settings.js
