@@ -11,6 +11,11 @@ panel_iframe:
     icon: mdi:shuffle-variant
     url: http://192.168.0.106:1885/
     require_admin: true
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://192.168.0.106:3218/
+    require_admin: true
 
 # Load frontend themes from the themes folder
 frontend:
