@@ -9,6 +9,7 @@ data/nodered/*
 data/mosquitto/data/*
 data/mosquitto/log/*
 data/influxdb/*
+data/grafana/data/*
 
 !data/hass-config/configuration.yaml
 !data/nodered/settings.js
