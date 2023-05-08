@@ -13,7 +13,7 @@ services:
       - "3306:3306"
     networks:
       - iot_hass_net
-  
+
   iot_hass_adminer:
     image: adminer
     container_name: iot_hass_adminer
@@ -24,7 +24,7 @@ services:
       - iot_hass_mariadb
     networks:
       - iot_hass_net
-  
+
   iot_hass_homeassistant:
     image: homeassistant/home-assistant
     container_name: iot_hass_homeassistant
@@ -41,7 +41,7 @@ services:
       - iot_hass_mqtt
     networks:
       - iot_hass_net
-  
+
   iot_hass_nodered:
     container_name: iot_hass_nodered
     image: nodered/node-red
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
     networks:
       - iot_hass_net
-  
+
   iot_hass_mqtt:
     image: eclipse-mosquitto
     container_name: iot_hass_mqtt
@@ -73,7 +73,7 @@ services:
     user: "${PUID}:${PGID}"
     networks:
       - iot_hass_net
-  
+
   iot_hass_configurator:
     image: "causticlab/hass-configurator-docker"
     container_name: iot_hass_configurator
@@ -88,7 +88,7 @@ services:
     user: "${PUID}:${PGID}"
     networks:
       - iot_hass_net
-  
+
   iot_hass_influxdb:
     image: influxdb
     container_name: iot_hass_influxdb
@@ -103,7 +103,7 @@ services:
     user: "${PUID}:${PGID}"
     networks:
       - iot_hass_net
-  
+
   iot_hass_telegraf:
     image: telegraf
     container_name: iot_hass_telegraf
@@ -136,6 +136,19 @@ services:
       - ./.env
     links:
       - iot_hass_influxdb
+    networks:
+      - iot_hass_net
+
+  iot_hass_esphome:
+    image: esphome/esphome
+    container_name: iot_hass_esphome
+    ports:
+      - '6052:6052'
+    volumes:
+      - ./data/esphome/:/config:rw
+    env_file:
+      - ./.env
+    restart: "no"
     networks:
       - iot_hass_net
 
