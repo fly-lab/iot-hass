@@ -121,6 +121,24 @@ services:
     networks:
       - iot_hass_net
 
+  iot_hass_grafana:
+    image: grafana/grafana
+    container_name: iot_hass_grafana
+    ports:
+      - '3030:3000'
+    volumes:
+      - ./data/grafana/data:/var/lib/grafana
+      # - ./data/grafana/provisioning/:/etc/grafana/provisioning/
+      # - ./data/grafana/dashboards/:/var/lib/grafana/dashboards/
+    depends_on:
+      - iot_hass_influxdb
+    env_file:
+      - ./.env
+    links:
+      - iot_hass_influxdb
+    networks:
+      - iot_hass_net
+
 networks:
   iot_hass_net:
     driver: bridge
