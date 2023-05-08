@@ -103,6 +103,23 @@ services:
     user: "${PUID}:${PGID}"
     networks:
       - iot_hass_net
+  
+  iot_hass_telegraf:
+    image: telegraf
+    container_name: iot_hass_telegraf
+    env_file:
+      - ./.env
+    volumes:
+      - './data/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro'
+    ports:
+      - '8125:8125'
+    restart: always
+    links:
+      - iot_hass_influxdb
+    depends_on:
+      - iot_hass_influxdb
+    networks:
+      - iot_hass_net
 
 networks:
   iot_hass_net:
